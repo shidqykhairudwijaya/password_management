@@ -8,6 +8,7 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JFrame;
 
 public class cek_pass extends javax.swing.JFrame {
        
@@ -18,12 +19,14 @@ public class cek_pass extends javax.swing.JFrame {
      */
     private byte[] hashedMasterKey;
 
-    
+    private javax.swing.JFrame previousPage; // simpan halaman sebelumnya
     private int userId;
+    
     public cek_pass() {
     // Constructor kosong
     }
-    public cek_pass(int userId, byte[] hashedMasterKey) {
+    public cek_pass(JFrame previousPage, int userId, byte[] hashedMasterKey) {
+        this.previousPage = previousPage;
         initComponents();
         this.userId = userId;
         this.hashedMasterKey = hashedMasterKey;  // simpan untuk decrypt
@@ -79,14 +82,14 @@ public class cek_pass extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btn_cek = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
-        jLabel9 = new javax.swing.JLabel();
+        kembali = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        keluar = new javax.swing.JLabel();
+        rumah = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
@@ -121,14 +124,14 @@ public class cek_pass extends javax.swing.JFrame {
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setPreferredSize(new java.awt.Dimension(269, 380));
 
-        jButton1.setBackground(new java.awt.Color(59, 130, 246));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Cek");
-        jButton1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_cek.setBackground(new java.awt.Color(59, 130, 246));
+        btn_cek.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_cek.setForeground(new java.awt.Color(255, 255, 255));
+        btn_cek.setText("Cek");
+        btn_cek.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        btn_cek.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_cekActionPerformed(evt);
             }
         });
 
@@ -138,24 +141,24 @@ public class cek_pass extends javax.swing.JFrame {
         jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/back_1.png"))); // NOI18N
-        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+        kembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/back_1.png"))); // NOI18N
+        kembali.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel9MouseClicked(evt);
+                kembaliMouseClicked(evt);
             }
         });
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/icons8-menu-50 (1) (1).png"))); // NOI18N
-        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+        keluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/icons8-menu-50 (1) (1).png"))); // NOI18N
+        keluar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel13MouseClicked(evt);
+                keluarMouseClicked(evt);
             }
         });
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/home.png"))); // NOI18N
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+        rumah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/home.png"))); // NOI18N
+        rumah.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
+                rumahMouseClicked(evt);
             }
         });
 
@@ -182,7 +185,7 @@ public class cek_pass extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(89, 89, 89)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_cek, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -199,11 +202,11 @@ public class cek_pass extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(keluar, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rumah, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(85, 85, 85)
-                .addComponent(jLabel9)
+                .addComponent(kembali)
                 .addGap(38, 38, 38))
         );
         jPanel1Layout.setVerticalGroup(
@@ -227,15 +230,15 @@ public class cek_pass extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(51, 51, 51)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_cek, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)))
                 .addGap(7, 7, 7)
                 .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel9))
+                    .addComponent(keluar)
+                    .addComponent(rumah)
+                    .addComponent(kembali))
                 .addGap(15, 15, 15))
         );
 
@@ -245,27 +248,25 @@ public class cek_pass extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>                        
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        Login cek = new Login(); 
-        cek.setVisible(true);          // Menampilkan halaman register
+    private void btn_cekActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        previousPage.setVisible(true);
         this.dispose();
-    }                                        
+    }                                       
 
-    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {                                     
-        Login cek = new Login();
-        cek.setVisible(true);          // Menampilkan halaman register
+    private void kembaliMouseClicked(java.awt.event.MouseEvent evt) {                                     
+        previousPage.setVisible(true);
         this.dispose();
     }                                    
 
-    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {                                      
+    private void keluarMouseClicked(java.awt.event.MouseEvent evt) {                                    
         System.exit(0);
-    }                                     
+    }                                   
 
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {                                     
+    private void rumahMouseClicked(java.awt.event.MouseEvent evt) {                                   
         Login cek = new Login();
         cek.setVisible(true);          // Menampilkan halaman register
         this.dispose();
-    }                                    
+    }                                  
 
     /**
      * @param args the command line arguments
@@ -293,11 +294,8 @@ public class cek_pass extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_cek;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator3;
@@ -308,200 +306,8 @@ public class cek_pass extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    // End of variables declaration                   
-}
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, -1));
-
-        jPanel1.setBackground(new java.awt.Color(245, 249, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(269, 380));
-
-        jButton1.setBackground(new java.awt.Color(59, 130, 246));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Cek");
-        jButton1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setText("Pertanyaan 1.");
-
-        jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        jLabel8.setText("Pertanyaan 2.");
-
-        jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/back_1.png"))); // NOI18N
-        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel9MouseClicked(evt);
-            }
-        });
-
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/icons8-menu-50 (1) (1).png"))); // NOI18N
-        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel13MouseClicked(evt);
-            }
-        });
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/home.png"))); // NOI18N
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
-            }
-        });
-
-        jLabel10.setText("Pertanyaan 3.");
-
-        jSeparator8.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jSeparator8)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jSeparator7, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                                .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addGap(0, 1, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9)
-                .addGap(29, 29, 29))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(92, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(103, 103, 103))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)))
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel9)))
-                    .addComponent(jLabel7))
-                .addGap(22, 22, 22))
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 270, 380));
-
-        pack();
-        setLocationRelativeTo(null);
-    }// </editor-fold>                        
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        Login cek = new Login(); 
-        cek.setVisible(true);          // Menampilkan halaman register
-        this.dispose();
-    }                                        
-
-    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {                                     
-        Login cek = new Login();
-        cek.setVisible(true);          // Menampilkan halaman register
-        this.dispose();
-    }                                    
-
-    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {                                      
-        System.exit(0);
-    }                                     
-
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {                                     
-        Login cek = new Login();
-        cek.setVisible(true);          // Menampilkan halaman register
-        this.dispose();
-    }                                    
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new cek_pass().setVisible(true));
-    }
-
-    // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
-    private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JLabel keluar;
+    private javax.swing.JLabel kembali;
+    private javax.swing.JLabel rumah;
     // End of variables declaration                   
 }
