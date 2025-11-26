@@ -5,6 +5,7 @@
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 /**
  *
@@ -19,16 +20,17 @@ public class edit_tabel extends javax.swing.JFrame {
     /**
      * Creates new form edit_tabel
      */
-     private int userId;          // simpan user id
+    private int userId;          // simpan user id
     private int credentialId;    // simpan credential id (row yang diedit)
     private String oldTitle;     // simpan title lama (opsional)
+    private javax.swing.JFrame previousPage; // simpan halaman sebelumnya
 
     public edit_tabel(int userId) {
-        this.userId = userId;
         initComponents();
     }
     
-    public edit_tabel(int userId, int credentialId, String account, String username, String password, String link, String notes) {
+    public edit_tabel(JFrame previousPage, int userId, int credentialId, String account, String username, String password, String link, String notes) {
+        this.previousPage = previousPage;
         this.userId = userId;
         this.credentialId = credentialId; // penting
         initComponents();
@@ -83,10 +85,10 @@ public class edit_tabel extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jSeparator3 = new javax.swing.JSeparator();
-        jLabel12 = new javax.swing.JLabel();
+        kembali = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        keluar = new javax.swing.JLabel();
+        rumah = new javax.swing.JLabel();
         edit_tabel = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         password_edit1 = new javax.swing.JPasswordField();
@@ -134,24 +136,24 @@ public class edit_tabel extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(245, 249, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(269, 380));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/back_1.png"))); // NOI18N
-        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+        kembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/back_1.png"))); // NOI18N
+        kembali.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel12MouseClicked(evt);
+                kembaliMouseClicked(evt);
             }
         });
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/icons8-menu-50 (1) (1).png"))); // NOI18N
-        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+        keluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/icons8-menu-50 (1) (1).png"))); // NOI18N
+        keluar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel13MouseClicked(evt);
+                keluarMouseClicked(evt);
             }
         });
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/home.png"))); // NOI18N
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+        rumah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/home.png"))); // NOI18N
+        rumah.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
+                rumahMouseClicked(evt);
             }
         });
 
@@ -280,11 +282,11 @@ public class edit_tabel extends javax.swing.JFrame {
                 .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(keluar, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rumah, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(94, 94, 94)
-                .addComponent(jLabel12)
+                .addComponent(kembali)
                 .addGap(15, 15, 15))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -390,9 +392,9 @@ public class edit_tabel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel12))
-                    .addComponent(jLabel13))
+                        .addComponent(rumah)
+                        .addComponent(kembali))
+                    .addComponent(keluar))
                 .addContainerGap())
         );
 
@@ -418,21 +420,20 @@ public class edit_tabel extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>                        
 
-    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {                                      
-        edit cek = new edit(userId);
-        cek.setVisible(true);          // Menampilkan halaman register
+    private void kembaliMouseClicked(java.awt.event.MouseEvent evt) {                                     
+        previousPage.setVisible(true);
         this.dispose();
-    }                                     
+    }                                    
 
-    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {                                      
+    private void keluarMouseClicked(java.awt.event.MouseEvent evt) {                                    
         System.exit(0);
-    }                                     
+    }                                   
 
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {                                     
+    private void rumahMouseClicked(java.awt.event.MouseEvent evt) {                                   
         Login cek = new Login();
         cek.setVisible(true);          // Menampilkan halaman register
         this.dispose();
-    }                                    
+    }                                  
 
     private void edit_tabelActionPerformed(java.awt.event.ActionEvent evt) {                                           
         try {
@@ -493,10 +494,19 @@ public class edit_tabel extends javax.swing.JFrame {
             // Simpan title terenkripsi terbaru
             oldTitle = encryptedTitle;
 
-            // Refresh halaman edit
-            edit cek = new edit(userId); 
-            cek.setVisible(true);
-            this.dispose();
+            if (updated > 0) {
+
+            // Refresh halaman sebelumnya sebelum dispose
+            if (previousPage instanceof edit) {
+                ((edit) previousPage).refreshTable(); // panggil method refresh
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Tidak ada perubahan yang dilakukan.");
+        }
+
+        // Kembali ke halaman sebelumnya
+        previousPage.setVisible(true);
+        this.dispose();
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Gagal: " + e.getMessage());
@@ -598,14 +608,11 @@ public class edit_tabel extends javax.swing.JFrame {
     private javax.swing.JLabel gacha_edit;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -617,11 +624,14 @@ public class edit_tabel extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JLabel keluar;
+    private javax.swing.JLabel kembali;
     private javax.swing.JTextField link_edit;
     private javax.swing.JTextField medsos_edit;
     private javax.swing.JLabel pass_kurang;
     private javax.swing.JPasswordField password_edit1;
     private javax.swing.JPasswordField password_edit2;
+    private javax.swing.JLabel rumah;
     private javax.swing.JTextField username_edit;
     // End of variables declaration                   
 }
