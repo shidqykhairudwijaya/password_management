@@ -3,10 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 import javax.swing.JOptionPane;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
-import java.sql.ResultSet;
+
 
 public class registrasi extends javax.swing.JFrame {
     private boolean passwordVisible = false;
@@ -34,6 +31,444 @@ public class registrasi extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        registrasi = new javax.swing.JButton();
+        jSeparator12 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
+        pertanyaan3 = new javax.swing.JTextField();
+        jSeparator5 = new javax.swing.JSeparator();
+        jLabel12 = new javax.swing.JLabel();
+        jSeparator8 = new javax.swing.JSeparator();
+        pertanyaan2 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        masterkey_regist1 = new javax.swing.JPasswordField();
+        icon_mata1 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        masterkey_regist2 = new javax.swing.JPasswordField();
+        pertanyaan1 = new javax.swing.JTextField();
+        jSeparator9 = new javax.swing.JSeparator();
+        icon_mata2 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(245, 249, 255));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.setPreferredSize(new java.awt.Dimension(269, 380));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/back_1.png"))); // NOI18N
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/icons8-menu-50 (1) (1).png"))); // NOI18N
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/home.png"))); // NOI18N
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
+
+        jPanel2.setBackground(new java.awt.Color(30, 58, 138));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("REGISTRASI");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+        );
+
+        registrasi.setBackground(new java.awt.Color(59, 130, 246));
+        registrasi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        registrasi.setForeground(new java.awt.Color(255, 255, 255));
+        registrasi.setText("REGIST");
+        registrasi.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        registrasi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrasiActionPerformed(evt);
+            }
+        });
+
+        jSeparator12.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabel6.setText("Pertanyaan pengingat (1) ");
+
+        pertanyaan3.setBorder(null);
+        pertanyaan3.setCaretColor(new java.awt.Color(59, 130, 246));
+        pertanyaan3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pertanyaan3ActionPerformed(evt);
+            }
+        });
+
+        jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabel12.setText("Pertanyaan pengingat (2) ");
+
+        jSeparator8.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        pertanyaan2.setBorder(null);
+        pertanyaan2.setCaretColor(new java.awt.Color(59, 130, 246));
+        pertanyaan2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pertanyaan2ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Master Key ");
+
+        masterkey_regist1.setBorder(null);
+        masterkey_regist1.setCaretColor(new java.awt.Color(59, 130, 246));
+        masterkey_regist1.setDisabledTextColor(new java.awt.Color(59, 130, 246));
+        masterkey_regist1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                masterkey_regist1ActionPerformed(evt);
+            }
+        });
+
+        icon_mata1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/output-onlinepngtools.png"))); // NOI18N
+        icon_mata1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                icon_mata1MouseClicked(evt);
+            }
+        });
+
+        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabel14.setText("Master Key ");
+
+        jLabel15.setText("Pertanyaan pengingat (3) ");
+
+        masterkey_regist2.setBorder(null);
+        masterkey_regist2.setCaretColor(new java.awt.Color(59, 130, 246));
+        masterkey_regist2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                masterkey_regist2ActionPerformed(evt);
+            }
+        });
+
+        pertanyaan1.setBorder(null);
+        pertanyaan1.setCaretColor(new java.awt.Color(59, 130, 246));
+
+        jSeparator9.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        icon_mata2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/output-onlinepngtools.png"))); // NOI18N
+        icon_mata2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                icon_mata2MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(93, 93, 93)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                        .addComponent(jLabel9)
+                        .addGap(23, 23, 23))
+                    .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pertanyaan2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator8)
+                            .addComponent(jSeparator3)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pertanyaan3))
+                            .addComponent(jSeparator9)
+                            .addComponent(jSeparator12)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(masterkey_regist1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(icon_mata1))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(masterkey_regist2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(icon_mata2)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addComponent(registrasi, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator5)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pertanyaan1)))))
+                .addGap(19, 19, 19))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(masterkey_regist1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4))
+                    .addComponent(icon_mata1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel14)
+                        .addComponent(masterkey_regist2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(icon_mata2))
+                .addGap(8, 8, 8)
+                .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(pertanyaan1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(pertanyaan2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pertanyaan3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator12, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(registrasi, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(jLabel7))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
+        );
+
+        setSize(new java.awt.Dimension(277, 434));
+        setLocationRelativeTo(null);
+    }// </editor-fold>                        
+
+    private void icon_mata2MouseClicked(java.awt.event.MouseEvent evt) {                                        
+        passwordVisible = !passwordVisible; // Toggle state
+
+        if (passwordVisible) {
+            masterkey_regist1.setEchoChar((char) 0);
+            masterkey_regist2.setEchoChar((char) 0);// Tampilkan password
+
+        } else {
+            masterkey_regist1.setEchoChar('•');
+            masterkey_regist2.setEchoChar('•');// Sembunyikan password
+
+        }
+    }                                       
+
+    private void masterkey_regist2ActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        // TODO add your handling code here:
+    }                                                 
+
+    private void icon_mata1MouseClicked(java.awt.event.MouseEvent evt) {                                        
+        passwordVisible = !passwordVisible; // Toggle state
+
+        if (passwordVisible) {
+            masterkey_regist1.setEchoChar((char) 0);
+            masterkey_regist2.setEchoChar((char) 0);// Tampilkan password
+
+        } else {
+            masterkey_regist1.setEchoChar('•');
+            masterkey_regist2.setEchoChar('•');// Sembunyikan password
+
+        }
+    }                                       
+
+    private void masterkey_regist1ActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        // TODO add your handling code here:
+    }                                                 
+
+    private void pertanyaan2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
+    private void pertanyaan3ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
+    private void registrasiActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        String pass1 = new String(masterkey_regist1.getPassword());
+        String pass2 = new String(masterkey_regist2.getPassword());
+        String q1 = pertanyaan1.getText();
+        String q2 = pertanyaan2.getText();
+        String q3 = pertanyaan3.getText();
+
+        // validasi input kosong
+        if(pass1.isEmpty() || pass2.isEmpty() || q1.isEmpty() || q2.isEmpty() || q3.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Semua field harus diisi!");
+            return;
+        }
+
+        // validasi masterkey cocok
+        if(!pass1.equals(pass2)){
+            JOptionPane.showMessageDialog(this, "Master Key tidak cocok!");
+            return;
+        }
+
+        // memanggil class Regist
+        Regist regist = new Regist();
+
+        // cek apakah masterkey sudah ada di DB
+        if(regist.searchMasterKey()){
+            JOptionPane.showMessageDialog(this, "Master Key sudah ada\n, tidak bisa regist lagi.");
+            return;
+        }
+        
+        int userId = regist.createMasterKey(pass1);
+        // buat masterkey
+        if(userId > 0){
+            if(regist.saveClue(userId, q1, q2, q3)){
+
+                JOptionPane.showMessageDialog(this, "Registrasi berhasil!");
+                new Login().setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Gagal menyimpan pertanyaan!");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Gagal membuat Master Key!");
+        }
+    }                                          
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {                                     
+        Login cek = new Login();
+        cek.setVisible(true);          // Menampilkan halaman register
+        this.dispose();
+    }                                    
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {                                      
+        System.exit(0);
+    }                                     
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {                                     
+        Login cek = new Login();
+        cek.setVisible(true);          // Menampilkan halaman register
+        this.dispose();
+    }                                    
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new registrasi().setVisible(true));
+    }
+    // Variables declaration - do not modify                     
+    private javax.swing.JLabel icon_mata1;
+    private javax.swing.JLabel icon_mata2;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator12;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JPasswordField masterkey_regist1;
+    private javax.swing.JPasswordField masterkey_regist2;
+    private javax.swing.JTextField pertanyaan1;
+    private javax.swing.JTextField pertanyaan2;
+    private javax.swing.JTextField pertanyaan3;
+    private javax.swing.JButton registrasi;
+    // End of variables declaration                   
+}
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         registrasi = new javax.swing.JButton();
