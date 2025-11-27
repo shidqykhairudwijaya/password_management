@@ -38,51 +38,26 @@ public class Tempilkan_pw extends javax.swing.JFrame {
     }
     
     private void loadData() {
-        // Ambil master key dari session Tampilan_utama
         byte[] hashedMasterKey = Tampilan_utama.currentHashedMasterKey;
 
-        // Buat model tabel
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        model.setRowCount(0); // kosongkan tabel dulu
-        
+        List<Password_general> list = Password_general.loadAll(userId, hashedMasterKey);
+        DefaultTableModel model = (DefaultTableModel) tabel_pass.getModel();
+        model.setRowCount(0);
 
-        try {
-            Connection conn = Database.getConnection();
-            PreparedStatement pst = conn.prepareStatement(
-                "SELECT account, username, password, link, notes FROM credentials WHERE user_id = ?"
-            );
-            pst.setInt(1, userId);
+        realPasswords.clear();
 
-            ResultSet rs = pst.executeQuery();
+        for (Password_general p : list) {
+            model.addRow(new Object[]{
+                p.getTitle(),
+                p.getUsername(),
+                "******",
+                p.getLink(),
+                p.getNotes()
+            });
 
-            while (rs.next()) {
-                // Ambil field terenkripsi
-                String encAccount = rs.getString("account");
-                String encUsername = rs.getString("username");
-                String encPassword = rs.getString("password");
-                String encLink = rs.getString("link");
-                String encNotes = rs.getString("notes");
-
-                // 🔓 Decrypt tiap field
-                String account = encryption.decrypt(encAccount, hashedMasterKey);
-                String username = encryption.decrypt(encUsername, hashedMasterKey);
-                String password = encryption.decrypt(encPassword, hashedMasterKey);
-                String link = encryption.decrypt(encLink, hashedMasterKey);
-                String notes = encryption.decrypt(encNotes, hashedMasterKey);
-
-                // simpan password asli
-                
-                realPasswords.add(password);
-
-                // Tambahkan ke tabel (password disensor)
-                model.addRow(new Object[]{account, username, "******", link, notes});
-                
-                
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Gagal load data: " + e.getMessage());
+            realPasswords.add(p.getPassword());
         }
+        Database.closeConnection();
     }
     
     
@@ -103,7 +78,7 @@ public class Tempilkan_pw extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabel_pass = new javax.swing.JTable();
         kembali = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
         keluar = new javax.swing.JLabel();
@@ -135,7 +110,7 @@ public class Tempilkan_pw extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(245, 249, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(269, 380));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabel_pass.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -151,17 +126,17 @@ public class Tempilkan_pw extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.addHierarchyListener(new java.awt.event.HierarchyListener() {
+        tabel_pass.addHierarchyListener(new java.awt.event.HierarchyListener() {
             public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
-                jTable2HierarchyChanged(evt);
+                tabel_passHierarchyChanged(evt);
             }
         });
-        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabel_pass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable2MouseClicked(evt);
+                tabel_passMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tabel_pass);
 
         kembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/back_1.png"))); // NOI18N
         kembali.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -262,15 +237,15 @@ public class Tempilkan_pw extends javax.swing.JFrame {
         System.exit(0);
     }                                   
 
-    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {                                     
+    private void tabel_passMouseClicked(java.awt.event.MouseEvent evt) {                                        
         if (evt.getClickCount() == 2) { // cek double-click
-        int row = jTable2.getSelectedRow();
+        int row = tabel_pass.getSelectedRow();
         if (row != -1) {
-            String account = (String) jTable2.getValueAt(row, 0);
-            String username = (String) jTable2.getValueAt(row, 1);
+            String account = (String) tabel_pass.getValueAt(row, 0);
+            String username = (String) tabel_pass.getValueAt(row, 1);
             String password = realPasswords.get(row); // ambil password asli
-            String link = (String) jTable2.getValueAt(row, 3);
-            String notes = (String) jTable2.getValueAt(row, 4);
+            String link = (String) tabel_pass.getValueAt(row, 3);
+            String notes = (String) tabel_pass.getValueAt(row, 4);
 
             // buka JFrame detail
             detail_tampilkan detail = new detail_tampilkan(this, userId, account, username, password, link, notes);
@@ -278,11 +253,11 @@ public class Tempilkan_pw extends javax.swing.JFrame {
             this.dispose();
         }
     }
-    }                                    
+    }                                       
 
-    private void jTable2HierarchyChanged(java.awt.event.HierarchyEvent evt) {                                         
+    private void tabel_passHierarchyChanged(java.awt.event.HierarchyEvent evt) {                                            
         // TODO add your handling code here:
-    }                                        
+    }                                           
 
     /**
      * @param args the command line arguments
@@ -316,10 +291,10 @@ public class Tempilkan_pw extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel keluar;
     private javax.swing.JLabel kembali;
     private javax.swing.JLabel rumah;
+    private javax.swing.JTable tabel_pass;
     // End of variables declaration                   
 }
