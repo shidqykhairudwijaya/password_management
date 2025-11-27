@@ -1,3 +1,6 @@
+
+import javax.swing.JFrame;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -14,15 +17,18 @@ public class Tampilan_utama extends javax.swing.JFrame {
     /**
      * Creates new form Tampilan_utama
      */
+    private javax.swing.JFrame previousPage; // simpan halaman sebelumnya
     private int userId;
     public static String currentMasterKey; // simpan master key untuk session
     public static byte[] currentHashedMasterKey; // simpan hasil hash
-    public Tampilan_utama(int userId) {
+    
+    public Tampilan_utama(JFrame previousPage,int userId) {
+        this.previousPage = previousPage;
         this.userId = userId;
         initComponents();
     }
 
-    public Tampilan_utama() {
+    public Tampilan_utama(int userId) {
         initComponents();
     }
 
@@ -45,10 +51,10 @@ public class Tampilan_utama extends javax.swing.JFrame {
         hapus_pass = new javax.swing.JButton();
         Tambah_pass = new javax.swing.JButton();
         edit_pass = new javax.swing.JButton();
-        back = new javax.swing.JLabel();
+        kembali = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
-        strip_tiga = new javax.swing.JLabel();
-        house = new javax.swing.JLabel();
+        keluar = new javax.swing.JLabel();
+        rumah = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -144,24 +150,24 @@ public class Tampilan_utama extends javax.swing.JFrame {
             }
         });
 
-        back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/back_1.png"))); // NOI18N
-        back.addMouseListener(new java.awt.event.MouseAdapter() {
+        kembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/back_1.png"))); // NOI18N
+        kembali.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                backMouseClicked(evt);
+                kembaliMouseClicked(evt);
             }
         });
 
-        strip_tiga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/icons8-menu-50 (1) (1).png"))); // NOI18N
-        strip_tiga.addMouseListener(new java.awt.event.MouseAdapter() {
+        keluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/icons8-menu-50 (1) (1).png"))); // NOI18N
+        keluar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                strip_tigaMouseClicked(evt);
+                keluarMouseClicked(evt);
             }
         });
 
-        house.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/home.png"))); // NOI18N
-        house.addMouseListener(new java.awt.event.MouseAdapter() {
+        rumah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/home.png"))); // NOI18N
+        rumah.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                houseMouseClicked(evt);
+                rumahMouseClicked(evt);
             }
         });
 
@@ -174,11 +180,11 @@ public class Tampilan_utama extends javax.swing.JFrame {
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(strip_tiga, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(keluar, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(house, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rumah, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(90, 90, 90)
-                .addComponent(back)
+                .addComponent(kembali)
                 .addGap(19, 19, 19))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
@@ -205,9 +211,9 @@ public class Tampilan_utama extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(house)
-                        .addComponent(back))
-                    .addComponent(strip_tiga))
+                        .addComponent(rumah)
+                        .addComponent(kembali))
+                    .addComponent(keluar))
                 .addContainerGap())
         );
 
@@ -233,45 +239,43 @@ public class Tampilan_utama extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     private void Tambah_passActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        Tambah_pw cek = new Tambah_pw(userId); 
+        Tambah_pw cek = new Tambah_pw(this, userId); 
         cek.setVisible(true);          // Menampilkan halaman register
         this.dispose();
     }                                           
 
     private void Tampilkan_passActionPerformed(java.awt.event.ActionEvent evt) {                                               
-
-        Tempilkan_pw cek = new Tempilkan_pw(userId); 
+        Tempilkan_pw cek = new Tempilkan_pw(this, userId); 
         cek.setVisible(true);          // Menampilkan halaman register
         this.dispose();
     }                                              
 
     private void edit_passActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        edit cek = new edit(userId); 
+        edit cek = new edit(this, userId); 
         cek.setVisible(true);          // Menampilkan halaman register
         this.dispose();
     }                                         
 
     private void hapus_passActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        Hapus cek = new Hapus(userId); 
+        Hapus cek = new Hapus(userId, this); 
         cek.setVisible(true);          // Menampilkan halaman register
         this.dispose();
     }                                          
 
-    private void backMouseClicked(java.awt.event.MouseEvent evt) {                                  
-        Login cek = new Login(); 
-        cek.setVisible(true);          // Menampilkan halaman register
+    private void kembaliMouseClicked(java.awt.event.MouseEvent evt) {                                     
+        previousPage.setVisible(true);
         this.dispose();
-    }                                 
+    }                                    
 
-    private void houseMouseClicked(java.awt.event.MouseEvent evt) {                                   
+    private void rumahMouseClicked(java.awt.event.MouseEvent evt) {                                   
         Login cek = new Login(); 
         cek.setVisible(true);          // Menampilkan halaman register
         this.dispose();
     }                                  
 
-    private void strip_tigaMouseClicked(java.awt.event.MouseEvent evt) {                                        
+    private void keluarMouseClicked(java.awt.event.MouseEvent evt) {                                    
         System.exit(0);
-    }                                       
+    }                                   
 
     /**
      * @param args the command line arguments
@@ -295,16 +299,14 @@ public class Tampilan_utama extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Tampilan_utama().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new Tampilan_utama(1).setVisible(true));
     }
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton Tambah_pass;
     private javax.swing.JButton Tampilkan_pass;
-    private javax.swing.JLabel back;
     private javax.swing.JButton edit_pass;
     private javax.swing.JButton hapus_pass;
-    private javax.swing.JLabel house;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JPanel jPanel1;
@@ -312,264 +314,8 @@ public class Tampilan_utama extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JLabel strip_tiga;
-    // End of variables declaration                   
-}
-        hapus_pass = new javax.swing.JButton();
-        Tambah_pass = new javax.swing.JButton();
-        edit_pass = new javax.swing.JButton();
-        back = new javax.swing.JLabel();
-        jSeparator6 = new javax.swing.JSeparator();
-        strip_tiga = new javax.swing.JLabel();
-        house = new javax.swing.JLabel();
-
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        jPanel1.setBackground(new java.awt.Color(236, 240, 241));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE)
-                .addGap(15, 15, 15))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(346, Short.MAX_VALUE)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
-        );
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel2.setBackground(new java.awt.Color(30, 58, 138));
-        jPanel2.setPreferredSize(new java.awt.Dimension(269, 53));
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("PASSWORD");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, -1));
-
-        jPanel3.setBackground(new java.awt.Color(245, 249, 255));
-        jPanel3.setFocusable(false);
-
-        Tampilkan_pass.setBackground(new java.awt.Color(59, 130, 246));
-        Tampilkan_pass.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        Tampilkan_pass.setForeground(new java.awt.Color(255, 255, 255));
-        Tampilkan_pass.setText("TAMPILKAN PASSWORD");
-        Tampilkan_pass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Tampilkan_passActionPerformed(evt);
-            }
-        });
-
-        hapus_pass.setBackground(new java.awt.Color(239, 68, 68));
-        hapus_pass.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        hapus_pass.setForeground(new java.awt.Color(255, 255, 255));
-        hapus_pass.setText("HAPUS PASSWORD");
-        hapus_pass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hapus_passActionPerformed(evt);
-            }
-        });
-
-        Tambah_pass.setBackground(new java.awt.Color(37, 99, 235));
-        Tambah_pass.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        Tambah_pass.setForeground(new java.awt.Color(255, 255, 255));
-        Tambah_pass.setText("TAMBAH PASSWORD");
-        Tambah_pass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Tambah_passActionPerformed(evt);
-            }
-        });
-
-        edit_pass.setBackground(new java.awt.Color(29, 78, 216));
-        edit_pass.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        edit_pass.setForeground(new java.awt.Color(255, 255, 255));
-        edit_pass.setText("EDIT PASSWORD");
-        edit_pass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edit_passActionPerformed(evt);
-            }
-        });
-
-        back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/back_1.png"))); // NOI18N
-        back.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                backMouseClicked(evt);
-            }
-        });
-
-        strip_tiga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/icons8-menu-50 (1) (1).png"))); // NOI18N
-        strip_tiga.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                strip_tigaMouseClicked(evt);
-            }
-        });
-
-        house.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/home.png"))); // NOI18N
-        house.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                houseMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Tampilkan_pass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Tambah_pass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edit_pass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(hapus_pass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 17, Short.MAX_VALUE))
-            .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(strip_tiga, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(house, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90)
-                .addComponent(back)
-                .addGap(19, 19, 19))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Tampilkan_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Tambah_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edit_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hapus_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(house)
-                        .addComponent(back))
-                    .addComponent(strip_tiga))
-                .addContainerGap())
-        );
-
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 50, 270, 380));
-
-        pack();
-        setLocationRelativeTo(null);
-    }// </editor-fold>                        
-
-    private void Tambah_passActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        Tambah_pw cek = new Tambah_pw(); 
-        cek.setVisible(true);          // Menampilkan halaman register
-        this.dispose();
-    }                                           
-
-    private void Tampilkan_passActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        Tempilkan_pw cek = new Tempilkan_pw(); 
-        cek.setVisible(true);          // Menampilkan halaman register
-        this.dispose();
-    }                                              
-
-    private void edit_passActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        edit cek = new edit(); 
-        cek.setVisible(true);          // Menampilkan halaman register
-        this.dispose();
-    }                                         
-
-    private void hapus_passActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        Hapus cek = new Hapus(); 
-        cek.setVisible(true);          // Menampilkan halaman register
-        this.dispose();
-    }                                          
-
-    private void backMouseClicked(java.awt.event.MouseEvent evt) {                                  
-        Login cek = new Login(); 
-        cek.setVisible(true);          // Menampilkan halaman register
-        this.dispose();
-    }                                 
-
-    private void houseMouseClicked(java.awt.event.MouseEvent evt) {                                   
-        Login cek = new Login(); 
-        cek.setVisible(true);          // Menampilkan halaman register
-        this.dispose();
-    }                                  
-
-    private void strip_tigaMouseClicked(java.awt.event.MouseEvent evt) {                                        
-        System.exit(0);
-    }                                       
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Tampilan_utama().setVisible(true));
-    }
-
-    // Variables declaration - do not modify                     
-    private javax.swing.JButton Tambah_pass;
-    private javax.swing.JButton Tampilkan_pass;
-    private javax.swing.JLabel back;
-    private javax.swing.JButton edit_pass;
-    private javax.swing.JButton hapus_pass;
-    private javax.swing.JLabel house;
-    private javax.swing.JFrame jFrame1;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JLabel strip_tiga;
+    private javax.swing.JLabel keluar;
+    private javax.swing.JLabel kembali;
+    private javax.swing.JLabel rumah;
     // End of variables declaration                   
 }
