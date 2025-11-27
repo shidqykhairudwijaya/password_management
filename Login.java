@@ -289,6 +289,8 @@ public class Login extends javax.swing.JFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        } finally {
+            Database.closeConnection();
         }
     }                                      
 
@@ -315,8 +317,7 @@ public class Login extends javax.swing.JFrame {
 
             if (rs.next()) {
                 loggedUserId = rs.getInt("user_id");
-                
-                
+                  
                 Tampilan_utama.currentMasterKey = master;
                 Tampilan_utama.currentHashedMasterKey = hash.hashedMasterKey;
 
@@ -334,6 +335,8 @@ public class Login extends javax.swing.JFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        } finally {
+            Database.closeConnection();
         }
     }                                     
 
