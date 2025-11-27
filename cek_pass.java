@@ -30,9 +30,9 @@ public class cek_pass extends javax.swing.JFrame {
         initComponents();
         this.userId = userId;
         this.hashedMasterKey = hashedMasterKey;  // simpan untuk decrypt
-        disableTextFocus(jTextField1);
-        disableTextFocus(jTextField2);
-        disableTextFocus(jTextField3);
+        disableTextFocus(pengingat1);
+        disableTextFocus(pengingat2);
+        disableTextFocus(pengingat3);
         loadQuestions();
     }
         private void disableTextFocus(javax.swing.JTextField field) {
@@ -54,13 +54,13 @@ public class cek_pass extends javax.swing.JFrame {
 
             if (rs.next()) {
                 // decrypt dari database menggunakan hashedMasterKey
-                jTextField1.setText(encryption.decrypt(rs.getString("question1"), hashedMasterKey));
-                jTextField2.setText(encryption.decrypt(rs.getString("question2"), hashedMasterKey));
-                jTextField3.setText(encryption.decrypt(rs.getString("question3"), hashedMasterKey));
+                pengingat1.setText(encryption.decrypt(rs.getString("question1"), hashedMasterKey));
+                pengingat2.setText(encryption.decrypt(rs.getString("question2"), hashedMasterKey));
+                pengingat3.setText(encryption.decrypt(rs.getString("question3"), hashedMasterKey));
             } else {
-                jTextField1.setText("Tidak ditemukan");
-                jTextField2.setText("-");
-                jTextField3.setText("-");
+                pengingat1.setText("Tidak ditemukan");
+                pengingat2.setText("-");
+                pengingat3.setText("-");
             }
 
         } catch (Exception e) {
@@ -91,9 +91,9 @@ public class cek_pass extends javax.swing.JFrame {
         keluar = new javax.swing.JLabel();
         rumah = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        pengingat1 = new javax.swing.JTextField();
+        pengingat2 = new javax.swing.JTextField();
+        pengingat3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(269, 457));
@@ -165,17 +165,17 @@ public class cek_pass extends javax.swing.JFrame {
         jSeparator8.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jTextField1.setBackground(new java.awt.Color(245, 249, 255));
-        jTextField1.setText("jTextField1");
-        jTextField1.setBorder(null);
+        pengingat1.setBackground(new java.awt.Color(245, 249, 255));
+        pengingat1.setText("jTextField1");
+        pengingat1.setBorder(null);
 
-        jTextField2.setBackground(new java.awt.Color(245, 249, 255));
-        jTextField2.setText("jTextField2");
-        jTextField2.setBorder(null);
+        pengingat2.setBackground(new java.awt.Color(245, 249, 255));
+        pengingat2.setText("jTextField2");
+        pengingat2.setBorder(null);
 
-        jTextField3.setBackground(new java.awt.Color(245, 249, 255));
-        jTextField3.setText("jTextField3");
-        jTextField3.setBorder(null);
+        pengingat3.setBackground(new java.awt.Color(245, 249, 255));
+        pengingat3.setText("jTextField3");
+        pengingat3.setBorder(null);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -193,12 +193,12 @@ public class cek_pass extends javax.swing.JFrame {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField3)
+                    .addComponent(pengingat3)
                     .addComponent(jSeparator8)
                     .addComponent(jSeparator7)
                     .addComponent(jSeparator4)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pengingat1)
+                    .addComponent(pengingat2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
@@ -218,15 +218,15 @@ public class cek_pass extends javax.swing.JFrame {
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(183, 183, 183))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pengingat1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(13, 13, 13)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pengingat2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
                         .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pengingat3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(51, 51, 51)
@@ -264,7 +264,7 @@ public class cek_pass extends javax.swing.JFrame {
 
     private void rumahMouseClicked(java.awt.event.MouseEvent evt) {                                   
         Login cek = new Login();
-        cek.setVisible(true);          // Menampilkan halaman register
+        cek.setVisible(true);          
         this.dispose();
     }                                  
 
@@ -303,11 +303,11 @@ public class cek_pass extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel keluar;
     private javax.swing.JLabel kembali;
+    private javax.swing.JTextField pengingat1;
+    private javax.swing.JTextField pengingat2;
+    private javax.swing.JTextField pengingat3;
     private javax.swing.JLabel rumah;
     // End of variables declaration                   
 }
