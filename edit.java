@@ -1,168 +1,364 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 
 /**
  *
  * @author HP
  */
-public class Password_general {
-    private String title, username, password, link, notes;
-    private int credentialsId;
+public class edit extends javax.swing.JFrame {
+    
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(edit.class.getName());
 
-    public Password_general (String title, String username, String password, String link, String notes){
-        this.title = title;
-        this.username = username;
-        this.password = password;
-        this.link = link;
-        this.notes = notes;
+    /**
+     * Creates new form edit
+     */
+    private int userId;
+    private List<String> realPasswords = new ArrayList<>(); // simpan password asli
+    private List<Integer> credentialIds = new ArrayList<>(); // simpan credential_id untuk update
+    private javax.swing.JFrame previousPage; // simpan halaman sebelumnya
+
+    public edit(JFrame previousPage, int userId) {
+    this.userId = userId;
+    this.previousPage = previousPage;
+    initComponents();
+    loadData();
+}
+    
+    public edit() {
+        initComponents();
     }
-    public Password_general (String title, String username, String password, String link, String notes, int credentialsId){
-        this.title = title;
-        this.username = username;
-        this.password = password;
-        this.link = link;
-        this.notes = notes;
-        this.credentialsId = credentialsId;
+ 
+    private void loadData() {
+    byte[] hashedMasterKey = Tampilan_utama.currentHashedMasterKey;
+
+    List<Password_general> list = Password_general.loadAll(userId, hashedMasterKey);
+    DefaultTableModel model = (DefaultTableModel) tabel_edit.getModel();
+    model.setRowCount(0);
+
+    realPasswords.clear();
+    credentialIds.clear();  // WAJIB KOSONGKAN DULU
+
+    for (Password_general p : list) {
+        model.addRow(new Object[]{
+            p.getTitle(),
+            p.getUsername(),
+            "******",     // hidden password
+            p.getLink(),
+            p.getNotes()
+        });
+
+        realPasswords.add(p.getPassword());
+        credentialIds.add(p.getId());  // ← FIX TERPENTING
     }
 
+    Database.closeConnection();
+}
 
-    //getter untuk masing-masing variabel
-    public String getTitle(){return title;}
-    public String getUsername(){return username;}
-    public String getPassword(){return password;}
-    public String getLink(){return link;}
-    public String getNotes(){return notes;}
-    public int getId(){return credentialsId;}
     
-
-    //setter untuk masing-masing variabel
-    public void setTitle(String title){ this.title = title;}
-    public void setUsername(String username){ this.username = username;}
-    public void setPassword(String password){ this.password = password;}
-    public void setLink(String link){ this.link = link;}
-    public void setNotes(String notes){ this.notes = notes;}
-    public void setNotes(int credentialsId){ this.credentialsId = credentialsId;}
-    
-    
-    public Password_general() {
-    
-    }
-     //inisialiasi kategori yang akan digunakan untuk password generator
-    private static final String UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private static final String LOWER = "abcdefghijklmnopqrstuvwxyz";
-    private static final String DIGITS = "0123456789";
-    private static final String SYMBOLS = "!@#$%^&*()-_=+[]{};:,.<>?/\\|";
-
-    //panjang password selalu 16
-    private static final int PASSWORD_LENGTH = 16;
-
-    private SecureRandom random = new SecureRandom();
-
-    public String generate() {
-        //mendeklarasikan array untuk menampung hasil generate
-        List<Character> chars = new ArrayList<>();
-
-        //men-generate 1 karakter untuk amsing-masing kategori
-        chars.add(randomChar(UPPER));
-        chars.add(randomChar(LOWER));
-        chars.add(randomChar(DIGITS));
-        chars.add(randomChar(SYMBOLS));
-
-        //menggabungkan semua kategori
-        String all = UPPER + LOWER + DIGITS + SYMBOLS;
-
-        //men-generate karakter dari gabungan kategori untuk mengisi sisanya
-        while (chars.size() < PASSWORD_LENGTH) {
-            chars.add(randomChar(all));
-        }
-
-        //mengacak urutan array chars
-        Collections.shuffle(chars);
-
-        //mengonversi array chars menjadi string
-        StringBuilder sb = new StringBuilder();
-        for (char c : chars) {
-            sb.append(c);
-        }
-
-        return sb.toString();
+    public void refreshTable() {
+        loadData(); // sudah ada method loadData() yang ambil data dari DB dan update tabel
     }
     
-    public static List<Password_general> loadAll(int userId, byte[] hashedMasterKey) {
-        List<Password_general> list = new ArrayList<>();
+    
 
-        try {
-            Connection conn = Database.getConnection();
-            PreparedStatement pst = conn.prepareStatement(
-                "SELECT credential_id, account, username, password, link, notes FROM credentials WHERE user_id = ?"
-            );
-            pst.setInt(1, userId);
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
 
-            ResultSet rs = pst.executeQuery();
+        jPanel1 = new javax.swing.JPanel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tabel_edit = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        input_edit = new javax.swing.JTextField();
+        tombol_input_edit = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jSeparator9 = new javax.swing.JSeparator();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
 
-            while (rs.next()) {
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-                String account  = encryption.decrypt(rs.getString("account"), hashedMasterKey);
-                String username = encryption.decrypt(rs.getString("username"), hashedMasterKey);
-                String password = encryption.decrypt(rs.getString("password"), hashedMasterKey);
-                String link     = encryption.decrypt(rs.getString("link"), hashedMasterKey);
-                String notes    = encryption.decrypt(rs.getString("notes"), hashedMasterKey);
-                int id          = rs.getInt("credential_id");
+        jPanel1.setBackground(new java.awt.Color(245, 249, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(269, 380));
 
-                Password_general pg = new Password_general(account, username, password, link, notes, id);
-
-                list.add(pg);
+        tabel_edit.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"google", "shidqy", "2342432", "google.com", "yang pertama"},
+                {"dfssd", "sdfsdf", "dsfds", "sdfdsf", null}
+            },
+            new String [] {
+                "Akun", "Username", "Password", "Link", "Catatan"
             }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabel_edit.setColumnSelectionAllowed(true);
+        tabel_edit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabel_editMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tabel_edit);
+        tabel_edit.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        jLabel2.setText("Input Username : ");
+
+        input_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                input_editActionPerformed(evt);
+            }
+        });
+
+        tombol_input_edit.setBackground(new java.awt.Color(59, 130, 246));
+        tombol_input_edit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tombol_input_edit.setForeground(new java.awt.Color(255, 255, 255));
+        tombol_input_edit.setText("input");
+        tombol_input_edit.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        tombol_input_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombol_input_editActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/back_1.png"))); // NOI18N
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/icons8-menu-50 (1) (1).png"))); // NOI18N
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imh/home.png"))); // NOI18N
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(input_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tombol_input_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(94, 94, 94)
+                .addComponent(jLabel12)
+                .addGap(15, 15, 15))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(input_edit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2))
+                    .addComponent(tombol_input_edit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel7)
+                        .addComponent(jLabel12))
+                    .addComponent(jLabel13))
+                .addGap(11, 11, 11))
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 53, 270, 370));
+
+        jPanel2.setBackground(new java.awt.Color(30, 58, 138));
+        jPanel2.setPreferredSize(new java.awt.Dimension(269, 53));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("EDIT");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, -1));
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>                        
+
+    private void tombol_input_editActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        String inputUsername = input_edit.getText().trim();
+        if (inputUsername.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username tidak boleh kosong!");
+            return;
         }
 
-        return list;
-    }
+        boolean found = false;
+        for (int row = 0; row < tabel_edit.getRowCount(); row++) {
+            String username = (String) tabel_edit.getValueAt(row, 1); // kolom username
+            if (username.equals(inputUsername)) {
+                int credentialId = credentialIds.get(row);
+                String account = (String) tabel_edit.getValueAt(row, 0);
+                String password = realPasswords.get(row);
+                String link = (String) tabel_edit.getValueAt(row, 3);
+                String notes = (String) tabel_edit.getValueAt(row, 4);
 
-
-    //fungsi untuk men-generate karakter acak dalam daftar kategori
-    private char randomChar(String src) {
-        return src.charAt(random.nextInt(src.length()));
-    }
-    
-    public enum Strength {
-        WEAK,
-        MEDIUM,
-        STRONG
-    }
-
-    public Strength strengthTest(String password) {
-        int score = 0;
-
-        //jika panjang password > 8, poin+1, >12 poin+2
-        if (password.length() >= 8) score++;
-        if (password.length() >= 12) score++;
-
-        if (password.matches(".*[A-Z].*")) score++;
-        if (password.matches(".*[a-z].*")) score++;
-        if (password.matches(".*[0-9].*")) score++;
-        if (password.matches(".*[!@#$%^&*()\\-_=+\\[\\]{};:,.<>?/\\\\|].*")) score++;
-
-        // bagian perhitungan score
-        if (score <= 2) {
-            System.out.println("Pastikan password mengandung huruf kecil, Kapital, angka, simbol, serta panjang > 12 karakter");
-            return Strength.WEAK;
-        } else if (score <= 4) {
-            System.out.println("Pastikan password mengandung huruf kecil, kapital, angka, simbol, serta panjang > 12 karakter");
-            return Strength.MEDIUM;
-        } else {
-            return Strength.STRONG;
+                // buka form edit
+                edit_tabel editForm = new edit_tabel(this, userId, credentialId, account, username, password, link, notes);
+                editForm.setVisible(true);
+                this.dispose();
+                found = true;
+                break;
+            }
         }
+
+        if (!found) {
+            JOptionPane.showMessageDialog(this, "Username tidak ditemukan!");
+        }
+    }                                                 
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {                                      
+        previousPage.setVisible(true);
+        this.dispose();
+    }                                     
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {                                     
+        Login cek = new Login(); 
+        cek.setVisible(true);          // Menampilkan halaman register
+        this.dispose();
+    }                                    
+
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {                                      
+        System.exit(0);
+    }                                     
+
+    private void tabel_editMouseClicked(java.awt.event.MouseEvent evt) {                                        
+        if (evt.getClickCount() == 2) { // double click untuk edit
+            int row = tabel_edit.getSelectedRow();
+            if (row != -1 && row < credentialIds.size() && row < realPasswords.size()) {
+                int credentialId = credentialIds.get(row);
+                String account = (String) tabel_edit.getValueAt(row, 0);
+                String username = (String) tabel_edit.getValueAt(row, 1);
+                String password = realPasswords.get(row);
+                String link = (String) tabel_edit.getValueAt(row, 3);
+                String notes = (String) tabel_edit.getValueAt(row, 4);
+
+                // buka form edit
+                edit_tabel editForm = new edit_tabel(this, userId, credentialId, account, username, password, link, notes);
+                editForm.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Data tidak tersedia atau list kosong");
+            }
+        }
+    }                                       
+
+    private void input_editActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                                          
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new edit().setVisible(true));
     }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JTextField input_edit;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JTable tabel_edit;
+    private javax.swing.JButton tombol_input_edit;
+    // End of variables declaration                   
 }
