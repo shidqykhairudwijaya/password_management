@@ -40,53 +40,30 @@ public class Hapus extends javax.swing.JFrame {
     }
     
     private void loadData() {
-        realPasswords.clear();
-        credentialIds.clear();
-        
-        // Ambil master key dari session Tampilan_utama
-        byte[] hashedMasterKey = Tampilan_utama.currentHashedMasterKey;
-        
-        // Buat model tabel
-        DefaultTableModel model = (DefaultTableModel) tabel_hapus.getModel();
-        model.setRowCount(0); // kosongkan tabel dulu
-        
+    byte[] hashedMasterKey = Tampilan_utama.currentHashedMasterKey;
 
-        try {
-            Connection conn = Database.getConnection();
-            PreparedStatement pst = conn.prepareStatement(
-                "SELECT credential_id, account, username, password, link, notes FROM credentials WHERE user_id = ?"
-            );
-            pst.setInt(1, userId);
+    List<Password_general> list = Password_general.loadAll(userId, hashedMasterKey);
+    DefaultTableModel model = (DefaultTableModel) tabel_hapus.getModel();
+    model.setRowCount(0);
 
-            ResultSet rs = pst.executeQuery();
+    realPasswords.clear();
+    credentialIds.clear();  // WAJIB KOSONGKAN DULU
 
-            while (rs.next()) {
-                int credentialId = rs.getInt("credential_id");
-                String encAccount = rs.getString("account");
-                String encUsername = rs.getString("username");
-                String encPassword = rs.getString("password");
-                String encLink = rs.getString("link");
-                String encNotes = rs.getString("notes");
+    for (Password_general p : list) {
+        model.addRow(new Object[]{
+            p.getTitle(),
+            p.getUsername(),
+            "******",     // hidden password
+            p.getLink(),
+            p.getNotes()
+        });
 
-                // 🔓 Decrypt tiap field
-                String account = encryption.decrypt(encAccount, hashedMasterKey);
-                String username = encryption.decrypt(encUsername, hashedMasterKey);
-                String password = encryption.decrypt(encPassword, hashedMasterKey);
-                String link = encryption.decrypt(encLink, hashedMasterKey);
-                String notes = encryption.decrypt(encNotes, hashedMasterKey);
-
-                // simpan password asli
-                realPasswords.add(password);
-                credentialIds.add(credentialId);
-                model.addRow(new Object[]{account, username, "******", link, notes});
-                
-                
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Gagal load data: " + e.getMessage());
-        }
+        realPasswords.add(p.getPassword());
+        credentialIds.add(p.getId());  // ← FIX TERPENTING
     }
+
+    Database.closeConnection();
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -322,6 +299,8 @@ public class Hapus extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Terjadi kesalahan: " + e.getMessage());
             e.printStackTrace();
+        } finally {
+            Database.closeConnection();
         }
     }                                            
 
