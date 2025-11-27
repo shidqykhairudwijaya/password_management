@@ -6,6 +6,9 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -93,6 +96,40 @@ public class Password_general {
 
         return sb.toString();
     }
+    
+    public static List<Password_general> loadAll(int userId, byte[] hashedMasterKey) {
+        List<Password_general> list = new ArrayList<>();
+
+        try {
+            Connection conn = Database.getConnection();
+            PreparedStatement pst = conn.prepareStatement(
+                "SELECT credential_id, account, username, password, link, notes FROM credentials WHERE user_id = ?"
+            );
+            pst.setInt(1, userId);
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+
+                String account  = encryption.decrypt(rs.getString("account"), hashedMasterKey);
+                String username = encryption.decrypt(rs.getString("username"), hashedMasterKey);
+                String password = encryption.decrypt(rs.getString("password"), hashedMasterKey);
+                String link     = encryption.decrypt(rs.getString("link"), hashedMasterKey);
+                String notes    = encryption.decrypt(rs.getString("notes"), hashedMasterKey);
+                int id          = rs.getInt("credential_id");
+
+                Password_general pg = new Password_general(account, username, password, link, notes, id);
+
+                list.add(pg);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
 
     //fungsi untuk men-generate karakter acak dalam daftar kategori
     private char randomChar(String src) {
