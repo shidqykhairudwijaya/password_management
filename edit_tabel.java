@@ -511,6 +511,8 @@ public class edit_tabel extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Gagal: " + e.getMessage());
             e.printStackTrace();
+        } finally {
+            Database.closeConnection();
         }
     }                                          
 
